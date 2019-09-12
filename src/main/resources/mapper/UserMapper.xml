@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.chen.mapper.UserMapper">
+
+    <select id="getAll" resultType="User">
+        select * from smbms_user
+    </select>
+
+    <select id="getAllByUserName" resultType="User" parameterType="String">
+        select * from smbms_user where userName like concat('%',#{userName},'%')
+    </select>
+
+    <insert id="add" parameterType="User">
+        insert into smbms_user(userCode,userName,userPassword,gender,birthday,phone,address,userRole,createdBy,creationDate,modifyBy,modifyDate)
+        values(#{userCode},#{userName},#{userPassword},#{gender},#{birthday},#{phone},#{address},#{userRole},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update smbms_user set userCode = #{userCode},userName = #{userName},userPassword = #{userPassword},gender = #{gender},birthday = #{birthday},phone = #{phone},address = #{address},userRole = #{userRole},createdBy = #{createdBy},creationDate = #{creationDate},modifyBy = #{modifyBy},modifyDate = #{modifyDate}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        delete from smbms_user where id = #{id}
+    </delete>
+
+</mapper>
